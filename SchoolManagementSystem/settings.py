@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'corsheaders',
     'rest_framework',
+    'drf_spectacular',
     'accounts',
 ]
 
@@ -128,6 +129,21 @@ SIMPLE_JWT = {
     'ACCESS_TOKEN_LIFETIME': datetime.timedelta(minutes=60),
     'REFRESH_TOKEN_LIFETIME': datetime.timedelta(days=1),
     'BLOCKLIST_AFTER_ROTATION': True,
+}
+
+# Django REST framework configuration
+REST_FRAMEWORK = {
+    'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    ),
+}
+
+# drf-spectacular settings for OpenAPI generation
+SPECTACULAR_SETTINGS = {
+    'TITLE': 'School Management System API',
+    'DESCRIPTION': 'API schema for the School Management System',
+    'VERSION': '1.0.0',
 }
 
 CORS_ALLOWED_ORIGINS = [
