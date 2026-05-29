@@ -1,10 +1,8 @@
-"""
-ASGI config for SchoolManagementSystem project.
+"""ASGI application for the Django project.
 
-It exposes the ASGI callable as a module-level variable named ``application``.
-
-For more information on this file, see
-https://docs.djangoproject.com/en/6.0/howto/deployment/asgi/
+This module exposes the ASGI callable as a module-level variable
+named ``application`` which ASGI servers use to communicate with
+the Django application.
 """
 
 import os

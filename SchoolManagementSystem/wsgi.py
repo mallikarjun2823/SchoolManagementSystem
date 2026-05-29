@@ -1,10 +1,8 @@
-"""
-WSGI config for SchoolManagementSystem project.
+"""WSGI application for the Django project.
 
-It exposes the WSGI callable as a module-level variable named ``application``.
-
-For more information on this file, see
-https://docs.djangoproject.com/en/6.0/howto/deployment/wsgi/
+This module exposes the WSGI callable as a module-level variable
+named ``application`` which the WSGI server can use to forward
+requests to Django.
 """
 
 import os

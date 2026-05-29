@@ -1,3 +1,9 @@
+"""Tests for accounts API endpoints.
+
+Contains functional tests that exercise registration and login
+endpoints including edge cases.
+"""
+
 from django.urls import reverse
 from rest_framework import status
 from rest_framework.test import APITestCase
