@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SMS Verification Console</title>
+    <script>
+      window.GOOGLE_OAUTH_CLIENT_ID = '<GOOGLE_OAUTH_CLIENT_ID>';
+    </script>
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <main class="shell">
+      <section class="hero">
+        <p class="eyebrow">School Management System</p>
+        <h1>Frontend verifier for auth, JWT, and Google OAuth</h1>
+        <p class="lede">
+          Use this console to register, log in, and complete Google OAuth against the Django backend.
+        </p>
+        <div class="status-bar">
+          <span id="backendStatus" class="pill pill-warn">Backend: checking...</span>
+          <span class="pill">API: http://localhost:8000</span>
+          <span class="pill">Frontend: http://localhost:3000</span>
+        </div>
+      </section>
+
+      <section class="grid">
+        <article class="card">
+          <h2>Register</h2>
+          <form id="registerForm" class="form">
+            <input name="username" placeholder="Username" required />
+            <input name="email" type="email" placeholder="Email" required />
+            <input name="password" type="password" placeholder="Password" required />
+            <select name="role" required>
+              <option value="student">Student</option>
+              <option value="teacher">Teacher</option>
+              <option value="admin">Admin</option>
+            </select>
+            <button type="submit">Create account</button>
+          </form>
+        </article>
+
+        <article class="card">
+          <h2>Login</h2>
+          <form id="loginForm" class="form">
+            <input name="username" placeholder="Username" required />
+            <input name="password" type="password" placeholder="Password" required />
+            <button type="submit">Login</button>
+          </form>
+        </article>
+
+        <article class="card accent">
+          <h2>Google OAuth</h2>
+          <p>
+            Click to start Google login. After Google redirects back to
+            <code>/auth/google/callback</code>, this page exchanges the code with the backend and shows the JWTs.
+          </p>
+          <button id="googleLoginBtn" type="button">Continue with Google</button>
+        </article>
+
+        <article class="card wide">
+          <div class="card-head">
+            <h2>Response</h2>
+            <button id="clearBtn" type="button" class="ghost">Clear</button>
+          </div>
+          <pre id="output">No response yet.</pre>
+        </article>
+      </section>
+    </main>
+
+    <script src="/app.js"></script>
+  </body>
+</html>

@@ -99,3 +99,9 @@ class AuthEndpointTests(APITestCase):
 
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
         self.assertIn('password', response.data)
+
+    def test_google_oauth_login_requires_code_or_access_token(self):
+        response = self.client.post(reverse('google_oauth_login'), {}, format='json')
+
+        self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
+        self.assertIn('non_field_errors', response.data)

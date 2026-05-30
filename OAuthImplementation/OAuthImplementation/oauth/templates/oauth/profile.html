@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+{% load static %}
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Profile</title>
+    <link rel="stylesheet" href="{% static 'oauth/style.css' %}">
+  </head>
+  <body class="center">
+    <h1>User Profile</h1>
+    {% if user.is_authenticated %}
+      <p>Username: {{ user.username }}</p>
+      <p>Email: {{ user.email }}</p>
+      {% if user.profile %}
+        <h2>Profile</h2>
+        <p>Provider: {{ user.profile.provider }}</p>
+        <p>Provider ID: {{ user.profile.provider_id }}</p>
+        <p>Picture: {% if user.profile.picture %}<img src="{{ user.profile.picture }}" alt="picture" width="64">{% endif %}</p>
+        <p>Token expires at: {{ user.profile.token_expires_at }}</p>
+      {% endif %}
+      {% if userinfo %}
+        <h2>Provider raw info</h2>
+        <pre>{{ userinfo|safe }}</pre>
+      {% endif %}
+      <p><a class="btn" href="{% url 'logout' %}">Logout</a></p>
+      <script src="{% static 'oauth/script.js' %}"></script>
+    {% else %}
+      <p>Not authenticated. <a href="{% url 'login' %}">Sign in</a></p>
+    {% endif %}
+  </body>
+</html>

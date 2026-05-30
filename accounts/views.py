@@ -5,10 +5,15 @@ authenticate existing users and rotate refresh tokens. The views are
 intended for use by a REST client such as a frontend application.
 """
 
+from django.conf import settings
 from rest_framework import status
 from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
 from rest_framework.views import APIView
+
+from allauth.socialaccount.providers.google.views import GoogleOAuth2Adapter
+from allauth.socialaccount.providers.oauth2.client import OAuth2Client
+from dj_rest_auth.registration.views import SocialLoginView
 
 from .serializers import ProfileCreateSerializer
 from .services import AuthService, JWTService
@@ -120,4 +125,17 @@ class RefreshView(APIView):
             return Response({'error': str(exc)}, status=status.HTTP_400_BAD_REQUEST)
 
         return Response(tokens, status=status.HTTP_200_OK)
+
+
+class GoogleOAuthLoginView(SocialLoginView):
+    """OAuth login endpoint for Google social authentication.
+
+    The view accepts either an authorization ``code`` or an
+    ``access_token`` and exchanges it for the local JWT response used by
+    the rest of the API.
+    """
+
+    adapter_class = GoogleOAuth2Adapter
+    client_class = OAuth2Client
+    callback_url = settings.GOOGLE_OAUTH_CALLBACK_URL
 
